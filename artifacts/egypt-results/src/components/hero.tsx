@@ -1,26 +1,61 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import CountUp from 'react-countup';
-import { Award, Users, TrendingUp, CheckCircle } from 'lucide-react';
+import { Users, TrendingUp, CheckCircle, Award } from 'lucide-react';
 import type { DataStatus } from '@/types';
 
+/* ── animation variants ─────────────────────────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 28 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
   }),
 };
 
-function StatCard({ icon: Icon, value, label, color }: {
-  icon: React.ElementType;
-  value: number;
-  label: string;
-  color: string;
-}) {
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const letterVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+};
+
+/* ── animated underline ─────────────────────────────── */
+function AnimatedUnderline() {
+  return (
+    <div className="relative h-1 w-full overflow-hidden rounded-full mt-3">
+      {/* base track */}
+      <div className="absolute inset-0 bg-border/60 rounded-full" />
+      {/* animated fill */}
+      <motion.div
+        className="absolute inset-y-0 right-0 rounded-full"
+        style={{ background: 'linear-gradient(90deg, hsl(24 95% 53%), hsl(20 100% 65%), hsl(24 95% 53%))' }}
+        initial={{ width: 0 }}
+        animate={{ width: '100%' }}
+        transition={{ delay: 0.6, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      />
+      {/* shimmer sweep */}
+      <motion.div
+        className="absolute inset-y-0 w-16 rounded-full"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }}
+        initial={{ right: '-10%' }}
+        animate={{ right: '110%' }}
+        transition={{ delay: 1.8, duration: 1.2, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2.5 }}
+      />
+    </div>
+  );
+}
+
+/* ── stat card ──────────────────────────────────────── */
+function StatCard({
+  icon: Icon, value, label,
+}: { icon: React.ElementType; value: number; label: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
@@ -28,25 +63,25 @@ function StatCard({ icon: Icon, value, label, color }: {
     <motion.div
       ref={ref}
       variants={fadeUp}
-      custom={0.1}
-      className="flex flex-col items-center gap-2 p-5 rounded-2xl glass glass-border"
+      custom={0}
+      whileHover={{ y: -3, scale: 1.03 }}
+      transition={{ type: 'spring', stiffness: 300 }}
+      className="flex flex-col items-center gap-1.5 p-4 rounded-2xl bg-card border border-border/60 shadow-sm"
     >
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
-        <Icon className="w-5 h-5" />
+      <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+        <Icon className="w-4 h-4" />
       </div>
-      <span className="text-2xl font-bold tabular-nums" dir="ltr">
-        {inView ? (
-          <CountUp end={value} duration={2} separator="," />
-        ) : '0'}
+      <span className="text-xl font-extrabold tabular-nums text-foreground" dir="ltr">
+        {inView ? <CountUp end={value} duration={2} separator="," /> : '0'}
       </span>
-      <span className="text-xs text-muted-foreground font-medium text-center">{label}</span>
+      <span className="text-xs text-muted-foreground font-medium text-center leading-tight">{label}</span>
     </motion.div>
   );
 }
 
+/* ── hero ───────────────────────────────────────────── */
 export function Hero() {
   const [status, setStatus] = useState<DataStatus | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/admin/status')
@@ -55,60 +90,87 @@ export function Hero() {
       .catch(() => {});
   }, []);
 
-  const handleScrollToSearch = () => {
-    document.getElementById('search-section')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const words = ['نتيجة', 'الثانوية', 'العامة'];
 
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden pt-12 pb-8 px-4">
-      {/* Soft background glow */}
+    <section className="relative overflow-hidden pt-10 pb-6 px-4">
+
+      {/* ── background orange glow ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-primary/6 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 left-1/3 w-60 h-60 bg-accent/6 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[220px] bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-primary/6 rounded-full blur-3xl" />
       </div>
 
       <motion.div
         initial="hidden"
         animate="visible"
-        className="relative z-10 w-full max-w-3xl mx-auto text-center space-y-6"
+        className="relative z-10 max-w-3xl mx-auto text-center space-y-5"
       >
-        {/* Badge */}
+        {/* badge */}
         <motion.div variants={fadeUp} custom={0} className="flex justify-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass glass-border text-xs font-medium">
-            <Award className="w-3.5 h-3.5 text-accent" />
-            <span>بوابة نتائج الثانوية العامة</span>
-          </div>
+          <motion.span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/8 text-primary text-xs font-semibold tracking-wide"
+            animate={{ boxShadow: ['0 0 0px hsl(24 95% 53% / 0)', '0 0 16px hsl(24 95% 53% / 0.35)', '0 0 0px hsl(24 95% 53% / 0)'] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            بوابة نتائج الثانوية العامة — مصر
+          </motion.span>
         </motion.div>
 
-        {/* Headline */}
-        <div className="space-y-1">
+        {/* headline — word by word */}
+        <div>
           <motion.h1
-            variants={fadeUp}
-            custom={0.1}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight"
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight flex flex-wrap justify-center gap-x-3"
           >
-            نتيجة <span className="text-gradient">الثانوية العامة</span>
+            {words.map((word, i) => (
+              <motion.span
+                key={i}
+                variants={letterVariant}
+                className={i === 1 ? 'text-gradient' : 'text-foreground'}
+              >
+                {word}
+              </motion.span>
+            ))}
           </motion.h1>
-          <motion.p
-            variants={fadeUp}
-            custom={0.2}
-            className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed"
+
+          {/* animated underline */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="max-w-xs sm:max-w-sm mx-auto"
           >
-            استعلم عن نتيجتك برقم الجلوس أو الاسم — بسهولة وفي ثوانٍ
-          </motion.p>
+            <AnimatedUnderline />
+          </motion.div>
         </div>
 
-        {/* Stats row */}
+        {/* subtitle */}
+        <motion.p
+          variants={fadeUp}
+          custom={0.3}
+          className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto leading-relaxed"
+        >
+          استعلم عن نتيجتك بسهولة وسرعة باستخدام{' '}
+          <span className="text-primary font-semibold">رقم الجلوس</span>
+          {' '}أو{' '}
+          <span className="text-primary font-semibold">الاسم</span>
+        </motion.p>
+
+        {/* stats */}
         {status?.loaded && status.count > 0 && (
           <motion.div
             variants={fadeUp}
-            custom={0.3}
+            custom={0.4}
             className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2"
           >
-            <StatCard icon={Users} value={status.count} label="إجمالي الطلاب" color="bg-primary/10 text-primary" />
-            <StatCard icon={CheckCircle} value={Math.round(status.count * 0.78)} label="الناجحون" color="bg-success/10 text-success" />
-            <StatCard icon={TrendingUp} value={410} label="أعلى مجموع" color="bg-accent/10 text-accent" />
-            <StatCard icon={Award} value={Math.round(status.count * 0.92)} label="أكملوا الاختبار" color="bg-secondary/10 text-secondary" />
+            <StatCard icon={Users}       value={status.count}                      label="إجمالي الطلاب"  />
+            <StatCard icon={CheckCircle} value={Math.round(status.count * 0.78)}   label="الناجحون"       />
+            <StatCard icon={Award}       value={Math.round(status.count * 0.92)}   label="أكملوا الاختبار"/>
+            <StatCard icon={TrendingUp}  value={410}                               label="أعلى مجموع"     />
           </motion.div>
         )}
       </motion.div>

@@ -20,26 +20,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/admin/status/route.js"
-    ],
-    "/api/healthz/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/healthz/route.js"
-    ],
-    "/api/results/search/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/results/search/route.js"
-    ],
-    "/result/[seatNumber]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/result/[seatNumber]/page.js"
-    ],
-    "/api/results/[seatNumber]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/results/[seatNumber]/route.js"
     ]
   }
 }

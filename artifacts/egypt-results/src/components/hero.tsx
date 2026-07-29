@@ -93,13 +93,7 @@ export function Hero() {
   const words = ['نتيجة', 'الثانوية', 'العامة'];
 
   return (
-    <section className="relative overflow-hidden pt-10 pb-6 px-4">
-
-      {/* ── background orange glow ── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[220px] bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-primary/6 rounded-full blur-3xl" />
-      </div>
+    <section className="relative pt-10 pb-6 px-4">
 
       <motion.div
         initial="hidden"

@@ -42,8 +42,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ar" dir="rtl" suppressHydrationWarning className={`${ibmArabic.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {/* ── page-level ambient glow — bleeds through all sections ── */}
+          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[340px] bg-primary/10 rounded-full blur-[80px]" />
+            <div className="absolute top-1/3 -right-32 w-72 h-72 bg-primary/7 rounded-full blur-[60px]" />
+            <div className="absolute bottom-1/4 -left-24 w-56 h-56 bg-primary/5 rounded-full blur-[50px]" />
+          </div>
+
           <Header />
-          <main className="flex-1 container mx-auto px-4 pt-20">
+          <main className="relative z-10 flex-1 container mx-auto px-4 pt-20">
             {children}
           </main>
           <Footer />

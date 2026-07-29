@@ -1,0 +1,659 @@
+Ultimate Prompt — Premium Next.js Results Website (Replit Inspired)
+
+You are a Principal Product Designer, Senior UX Architect, and Staff Next.js Engineer.
+
+Your mission is to design and build a world-class student results website inspired by the visual quality of Replit, while maintaining its own identity. The website must feel premium, elegant, lightning-fast, and production-ready.
+
+The design should be comparable to modern SaaS products like Replit, Linear, Vercel, Stripe, Framer, OpenAI, and Notion.
+
+---
+
+Tech Stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- GSAP
+- SplitType
+- Framer Motion
+- shadcn/ui
+- Radix UI
+- Lucide React
+- next/font
+- TanStack Table
+- TanStack Virtual
+- React Hook Form
+- Zod
+- Sonner (Toast)
+- cmdk (Command Palette)
+- Embla Carousel
+- React Icons
+- React CountUp
+- React Share
+- Fuse.js (Fast Search)
+- Motion One (for lightweight animations where suitable)
+
+---
+
+Typography
+
+Arabic:
+
+- IBM Plex Sans Arabic (Primary)
+
+English:
+
+- Inter
+
+Load fonts using next/font.
+
+Perfect Arabic typography is mandatory.
+
+---
+
+Color System
+
+Create a premium design inspired by Replit.
+
+Use elegant dark and light themes.
+
+Colors should feel premium, modern, calm, and luxurious.
+
+Avoid:
+
+- Generic AI gradients
+- Neon purple
+- Cheap glowing effects
+- Overused blue backgrounds
+
+Keep spacing, shadows, borders, radius and hierarchy similar to Replit.
+
+---
+
+Layout
+
+Create a complete website containing:
+
+Premium Header
+
+Sticky header
+
+Blur backdrop
+
+Glass effect
+
+Smooth shadow on scroll
+
+Animated logo
+
+Responsive Navigation
+
+Desktop Menu
+
+Mobile Drawer
+
+Theme Toggle
+
+Search Button
+
+Results Button
+
+Beautiful Hover Effects
+
+Active Link Indicator
+
+Smooth Scroll
+
+Keyboard Accessible
+
+---
+
+Hero Section
+
+Award-winning Hero inspired by Replit.
+
+Use:
+
+GSAP
+
+SplitType
+
+Framer Motion
+
+Features:
+
+- Animated badge
+- Massive headline
+- Word-by-word animation
+- SVG animated underline
+- Gradient highlighted words
+- CTA buttons
+- Floating dashboard illustration
+- Glass cards
+- Mouse parallax
+- Animated statistics
+- Premium micro interactions
+
+---
+
+Search Section
+
+Large centered search card.
+
+Allow search by:
+
+- Seat Number
+- Student Name
+
+Instant validation.
+
+Animated search button.
+
+Beautiful input fields.
+
+Floating labels.
+
+Loading animation.
+
+Smart error handling.
+
+Keyboard support.
+
+---
+
+Results Section
+
+When a result is found:
+
+Display a premium result card.
+
+Include:
+
+- Student Name
+- Seat Number
+- National ID (optional if available)
+- School
+- Governorate
+- Department
+- Subjects
+- Marks
+- Percentage
+- Total
+- Status
+- Ranking (if available)
+
+Everything should animate beautifully.
+
+---
+
+Results Table
+
+Use:
+
+TanStack Table
+
+Features:
+
+Sorting
+
+Filtering
+
+Pagination
+
+Sticky Header
+
+Responsive Cards on Mobile
+
+Virtualization for huge datasets
+
+Column Visibility
+
+Copy Value Button
+
+Export Ready Structure
+
+Beautiful Empty State
+
+Skeleton Loading
+
+Animated Row Hover
+
+Rounded Design
+
+---
+
+Search Experience
+
+Use Fuse.js.
+
+Instant Search.
+
+Debounced Search.
+
+Search Suggestions.
+
+Highlight matching text.
+
+Search History.
+
+Clear Search.
+
+Recent Searches.
+
+---
+
+Share Result
+
+Provide beautiful share buttons.
+
+Use React Share.
+
+Support:
+
+WhatsApp
+
+Telegram
+
+Facebook
+
+X (Twitter)
+
+Copy Link
+
+Native Share API (Mobile)
+
+Generate a shareable result link.
+
+Beautiful success toast after sharing.
+
+---
+
+Print Result
+
+Beautiful printable layout.
+
+Print Button.
+
+PDF-friendly styling.
+
+Clean typography.
+
+---
+
+Upload Excel
+
+Admin Panel
+
+Excel Upload
+
+Drag & Drop
+
+Progress Bar
+
+Validation
+
+Duplicate Detection
+
+Error Report
+
+Large File Support
+
+Fast Parsing
+
+---
+
+Admin Dashboard
+
+Beautiful dashboard.
+
+Statistics Cards.
+
+Search Analytics.
+
+Recent Searches.
+
+Visitors Counter.
+
+System Health.
+
+Dark Mode.
+
+---
+
+Footer
+
+Premium Footer.
+
+Inspired by Replit.
+
+Include:
+
+Quick Links
+
+About
+
+Privacy Policy
+
+Terms
+
+Contact
+
+Social Icons
+
+Copyright
+
+Made with ❤️
+
+Display:
+
+Developed by Ahmed Elhenawy
+
+Elegant hover animations.
+
+---
+
+UI Components
+
+Use shadcn/ui components everywhere.
+
+Buttons
+
+Cards
+
+Inputs
+
+Dialogs
+
+Drawer
+
+Dropdown
+
+Popover
+
+Tabs
+
+Accordion
+
+Tooltip
+
+Hover Card
+
+Skeleton
+
+Command
+
+Alert Dialog
+
+Toast
+
+Separator
+
+Breadcrumb
+
+Pagination
+
+Badge
+
+Avatar
+
+Progress
+
+Scroll Area
+
+Resizable Panels
+
+Navigation Menu
+
+Context Menu
+
+---
+
+Animations
+
+GSAP
+
+SplitType
+
+Framer Motion
+
+Use only smooth premium animations.
+
+Include:
+
+Word reveal
+
+Fade
+
+Blur
+
+Scale
+
+Parallax
+
+Floating
+
+Button ripple
+
+Magnetic buttons
+
+Hover lift
+
+Smooth page transitions
+
+Animated counters
+
+Animated SVG underline
+
+Soft glowing borders
+
+Light sweep
+
+Page reveal
+
+No aggressive animation.
+
+Everything should feel expensive.
+
+---
+
+Buttons
+
+Buttons should feel world-class.
+
+Rounded XL.
+
+Beautiful hover.
+
+Magnetic effect.
+
+Ripple effect.
+
+Soft shadows.
+
+Gradient border.
+
+Smooth transition.
+
+Accessible focus state.
+
+---
+
+Icons
+
+Lucide React
+
+Consistent icon sizing.
+
+Animated icons where appropriate.
+
+---
+
+Responsive Design
+
+Perfect on:
+
+320px
+
+375px
+
+390px
+
+414px
+
+768px
+
+1024px
+
+1280px
+
+1440px
+
+1920px
+
+Completely responsive.
+
+No overflow.
+
+No broken layouts.
+
+Perfect spacing.
+
+Touch-friendly.
+
+Large tap targets.
+
+Responsive tables.
+
+Responsive typography.
+
+Responsive navigation.
+
+Landscape support.
+
+Tablet optimization.
+
+Desktop optimization.
+
+---
+
+Performance
+
+Target:
+
+100 Lighthouse Performance
+
+100 Accessibility
+
+100 Best Practices
+
+100 SEO
+
+Use:
+
+Server Components whenever possible.
+
+Client Components only for animations.
+
+Lazy Loading.
+
+Code Splitting.
+
+Image Optimization.
+
+Font Optimization.
+
+GPU accelerated animations.
+
+No layout shift.
+
+Core Web Vitals optimized.
+
+---
+
+Accessibility
+
+WCAG AA+
+
+Keyboard navigation.
+
+Screen reader support.
+
+Semantic HTML.
+
+ARIA labels.
+
+Focus management.
+
+Reduced Motion support.
+
+High contrast.
+
+---
+
+SEO
+
+Metadata API.
+
+Open Graph.
+
+Twitter Cards.
+
+JSON-LD.
+
+Dynamic sitemap.
+
+Robots.txt.
+
+Canonical URLs.
+
+Structured Data.
+
+---
+
+Code Quality
+
+Clean architecture.
+
+Reusable components.
+
+Strict TypeScript.
+
+Feature-based folders.
+
+Custom hooks.
+
+Utility functions.
+
+Proper error handling.
+
+Production-ready.
+
+Maintainable.
+
+Scalable.
+
+---
+
+Final QA Checklist
+
+Before considering the project complete, automatically perform a comprehensive review:
+
+- Verify every page on desktop, tablet, and mobile.
+- Check RTL and LTR layouts.
+- Test all buttons, forms, dialogs, dropdowns, and menus.
+- Validate search by seat number and student name.
+- Verify Excel upload and parsing.
+- Test result rendering with large datasets.
+- Ensure TanStack Table is fully responsive.
+- Verify WhatsApp and Telegram sharing.
+- Test Print layout.
+- Check Dark Mode and Light Mode.
+- Confirm all animations run at 60 FPS.
+- Eliminate layout shifts and console errors.
+- Ensure accessibility compliance.
+- Optimize bundle size.
+- Confirm SEO metadata is complete.
+- Fix every visual inconsistency automatically before finishing.
+
+The final product must look indistinguishable in quality from a premium SaaS application, with exceptional UX, polished animations, flawless responsiveness, and production-ready code.

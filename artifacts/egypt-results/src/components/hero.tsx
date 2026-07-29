@@ -60,97 +60,50 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden pt-24 pb-16 px-4">
-      {/* Background decoration */}
+    <section className="relative flex flex-col items-center justify-center overflow-hidden pt-12 pb-8 px-4">
+      {/* Soft background glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-secondary/8 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/4 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-primary/6 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/3 w-60 h-60 bg-accent/6 rounded-full blur-3xl" />
       </div>
 
       <motion.div
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-4xl mx-auto text-center space-y-8"
+        className="relative z-10 w-full max-w-3xl mx-auto text-center space-y-6"
       >
         {/* Badge */}
         <motion.div variants={fadeUp} custom={0} className="flex justify-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glass-border text-sm font-medium">
-            <Award className="w-4 h-4 text-accent" />
-            <span>بوابة رسمية لنتائج الثانوية العامة</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass glass-border text-xs font-medium">
+            <Award className="w-3.5 h-3.5 text-accent" />
+            <span>بوابة نتائج الثانوية العامة</span>
           </div>
         </motion.div>
 
         {/* Headline */}
-        <div className="space-y-3">
+        <div className="space-y-1">
           <motion.h1
             variants={fadeUp}
             custom={0.1}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight"
           >
-            نتيجة{' '}
-            <span className="text-gradient">الثانوية العامة</span>
+            نتيجة <span className="text-gradient">الثانوية العامة</span>
           </motion.h1>
-          <motion.div
+          <motion.p
             variants={fadeUp}
-            custom={0.15}
-            className="relative inline-block"
+            custom={0.2}
+            className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed"
           >
-            <span className="text-3xl md:text-5xl font-bold text-muted-foreground">
-              مصر
-            </span>
-            {/* Animated underline */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.8, duration: 0.6, ease: 'easeOut' }}
-              className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-l from-accent to-primary origin-right"
-            />
-          </motion.div>
+            استعلم عن نتيجتك برقم الجلوس أو الاسم — بسهولة وفي ثوانٍ
+          </motion.p>
         </div>
 
-        {/* Subtitle */}
-        <motion.p
-          variants={fadeUp}
-          custom={0.25}
-          className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-        >
-          استعلم عن نتيجتك بسهولة وسرعة باستخدام{' '}
-          <span className="text-foreground font-semibold">رقم الجلوس</span>
-          {' '}أو{' '}
-          <span className="text-foreground font-semibold">الاسم</span>
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={fadeUp}
-          custom={0.35}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleScrollToSearch}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-bold text-lg shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all shine"
-          >
-            ابحث عن نتيجتك
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleScrollToSearch}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-card border border-border text-foreground font-semibold text-lg hover:border-primary/40 hover:bg-muted transition-all"
-          >
-            البحث بالاسم
-          </motion.button>
-        </motion.div>
-
-        {/* Stats */}
+        {/* Stats row */}
         {status?.loaded && status.count > 0 && (
           <motion.div
             variants={fadeUp}
-            custom={0.45}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-8"
+            custom={0.3}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2"
           >
             <StatCard icon={Users} value={status.count} label="إجمالي الطلاب" color="bg-primary/10 text-primary" />
             <StatCard icon={CheckCircle} value={Math.round(status.count * 0.78)} label="الناجحون" color="bg-success/10 text-success" />
@@ -158,22 +111,6 @@ export function Hero() {
             <StatCard icon={Award} value={Math.round(status.count * 0.92)} label="أكملوا الاختبار" color="bg-secondary/10 text-secondary" />
           </motion.div>
         )}
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center pt-1.5"
-        >
-          <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
-        </motion.div>
       </motion.div>
     </section>
   );

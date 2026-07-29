@@ -108,7 +108,7 @@ export function SearchCard() {
   };
 
   return (
-    <section id="search-section" className="w-full max-w-2xl mx-auto">
+    <section id="search-section" className="w-full max-w-2xl mx-auto px-0">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -288,13 +288,13 @@ export function SearchCard() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.04 }}
                             onClick={() => handleStudentClick(student)}
-                            className="w-full group p-4 bg-background border border-border rounded-xl hover:border-primary/40 hover:shadow-md transition-all text-right flex items-center justify-between"
+                            className="w-full group p-3 bg-background border border-border rounded-xl hover:border-primary/40 hover:shadow-md transition-all text-right flex items-center justify-between gap-2 min-w-0"
                           >
-                            <div>
-                              <h3 className="font-bold text-base group-hover:text-primary transition-colors">
+                            <div className="min-w-0 flex-1">
+                              <h3 className="font-bold text-base group-hover:text-primary transition-colors break-words leading-snug">
                                 {student.arabicName}
                               </h3>
-                              <p className="text-muted-foreground text-sm mt-0.5 flex flex-wrap gap-3">
+                              <p className="text-muted-foreground text-xs mt-1 flex flex-wrap gap-2">
                                 <span>رقم الجلوس: <span className="font-semibold text-foreground" dir="ltr">{student.seatNumber}</span></span>
                                 <span>المجموع: <span className="font-semibold text-foreground" dir="ltr">{student.totalDegree}</span></span>
                               </p>

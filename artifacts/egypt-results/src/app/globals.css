@@ -54,20 +54,20 @@
   --accent: 36 47% 57%;
   --accent-foreground: 0 0% 100%;
 
-  --background: 220 14% 97%;
+  --background: 34 40% 97%;
   --foreground: 222 47% 11%;
 
-  --card: 0 0% 100%;
+  --card: 34 30% 99%;
   --card-foreground: 222 47% 11%;
 
-  --popover: 0 0% 100%;
+  --popover: 34 30% 99%;
   --popover-foreground: 222 47% 11%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
+  --border: 34 20% 88%;
+  --input: 34 20% 88%;
   --ring: 208 79% 28%;
 
-  --muted: 210 40% 96%;
+  --muted: 34 25% 94%;
   --muted-foreground: 215 16% 47%;
 
   --destructive: 0 84% 60%;

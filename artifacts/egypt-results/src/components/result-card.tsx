@@ -126,40 +126,10 @@ export function ResultCard({ seatNumber }: { seatNumber: number }) {
         {/* Top gradient bar */}
         <div className={`h-1.5 w-full ${pass ? 'bg-gradient-to-l from-success via-primary to-secondary' : 'bg-gradient-to-l from-destructive via-destructive/70 to-destructive/40'}`} />
 
-        <div className="p-8 md:p-12">
+        <div className="p-4 sm:p-8 md:p-10">
           {/* Header */}
-          <div className="flex flex-col md:flex-row items-center gap-8 pb-8 border-b border-border">
-            <div className="flex-1 text-center md:text-right space-y-4">
-              <div className="flex items-center justify-center md:justify-start gap-2 text-sm font-semibold tracking-widest text-accent uppercase">
-                <GraduationCap className="w-4 h-4" />
-                بطاقة نتيجة طالب
-              </div>
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-3xl md:text-4xl font-extrabold leading-tight"
-              >
-                {student.arabicName}
-              </motion.h1>
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-muted text-sm font-semibold">
-                  رقم الجلوس:
-                  <span className="text-foreground font-bold" dir="ltr">{student.seatNumber}</span>
-                </span>
-                <motion.span
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.4, type: 'spring' }}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold ${statusBg}`}
-                >
-                  <StatusIcon className="w-4 h-4" />
-                  {student.studentCaseDesc}
-                </motion.span>
-              </div>
-            </div>
-
-            {/* Circular progress */}
+          <div className="flex flex-col items-center gap-6 pb-6 border-b border-border">
+            {/* Circular progress - top on mobile */}
             <div className="flex-shrink-0 flex flex-col items-center gap-2">
               <CircularProgress value={percentage} color={progressColor} />
               <p className="text-sm text-muted-foreground font-medium text-center">
@@ -167,6 +137,36 @@ export function ResultCard({ seatNumber }: { seatNumber: number }) {
                 <span className="text-foreground font-bold text-lg" dir="ltr">{student.totalDegree}</span>
                 <span className="text-xs"> / {MAX_DEGREE}</span>
               </p>
+            </div>
+
+            <div className="w-full text-center space-y-3">
+              <div className="flex items-center justify-center gap-2 text-sm font-semibold tracking-widest text-accent uppercase">
+                <GraduationCap className="w-4 h-4" />
+                بطاقة نتيجة طالب
+              </div>
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug break-words w-full"
+              >
+                {student.arabicName}
+              </motion.h1>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm font-semibold">
+                  رقم الجلوس:
+                  <span className="text-foreground font-bold" dir="ltr">{student.seatNumber}</span>
+                </span>
+                <motion.span
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.4, type: 'spring' }}
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm font-bold ${statusBg}`}
+                >
+                  <StatusIcon className="w-4 h-4" />
+                  {student.studentCaseDesc}
+                </motion.span>
+              </div>
             </div>
           </div>
 

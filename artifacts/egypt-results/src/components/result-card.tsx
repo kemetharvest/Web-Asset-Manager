@@ -114,6 +114,11 @@ export function ResultCard({ seatNumber }: { seatNumber: number }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const confettiFired = useRef(false);
+  // Detect Web Share API only after mount to avoid SSR/client hydration mismatch
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => {
+    setCanShare(typeof navigator !== 'undefined' && 'share' in navigator);
+  }, []);
 
   useEffect(() => {
     if (!seatNumber) return;
@@ -264,7 +269,7 @@ export function ResultCard({ seatNumber }: { seatNumber: number }) {
             </motion.button>
 
             {/* share */}
-            {typeof navigator !== 'undefined' && 'share' in navigator && (
+            {canShare && (
               <motion.button
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigator.share({ title: 'نتيجتي', text: shareText })}

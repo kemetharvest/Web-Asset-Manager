@@ -1,5 +1,6 @@
 {
   "/api/admin/status/route": "app/api/admin/status/route.js",
-  "/api/healthz/route": "app/api/healthz/route.js",
-  "/page": "app/page.js"
+  "/api/results/[seatNumber]/route": "app/api/results/[seatNumber]/route.js",
+  "/page": "app/page.js",
+  "/result/[seatNumber]/page": "app/result/[seatNumber]/page.js"
 }

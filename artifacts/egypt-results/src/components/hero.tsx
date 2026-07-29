@@ -1,19 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { GraduationCap, Star, BookOpen, Award } from 'lucide-react';
 
 /* ── variants ───────────────────────────────────────── */
-const fadeUp = (delay = 0) => ({
-  hidden: { opacity: 0, y: 32 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay },
-  },
-});
-
 const wordVariant = {
   hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
   visible: (i: number) => ({
@@ -23,6 +13,15 @@ const wordVariant = {
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.15 + i * 0.12 },
   }),
 };
+
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
+  },
+});
 
 /* ── animated underline ─────────────────────────────── */
 function AnimatedUnderline() {
@@ -72,39 +71,7 @@ function FloatingIcon({
   );
 }
 
-/* ── orb ────────────────────────────────────────────── */
-function Orb({ className, delay }: { className: string; delay: number }) {
-  const reduced = useReducedMotion();
-  return (
-    <motion.div
-      className={`absolute rounded-full blur-3xl pointer-events-none select-none ${className}`}
-      initial={{ opacity: 0 }}
-      animate={reduced ? { opacity: 1 } : {
-        opacity: [0, 1, 0.8],
-        scale: [0.8, 1.05, 0.95, 1],
-      }}
-      transition={{
-        opacity: { duration: 1.2, delay },
-        scale: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay },
-      }}
-    />
-  );
-}
-
-/* ── dot grid ───────────────────────────────────────── */
-function DotGrid() {
-  return (
-    <div
-      className="absolute inset-0 pointer-events-none select-none opacity-[0.04]"
-      style={{
-        backgroundImage: 'radial-gradient(circle, hsl(24 95% 53%) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-      }}
-    />
-  );
-}
-
-/* ── shimmer text ───────────────────────────────────── */
+/* ── shimmer badge ──────────────────────────────────── */
 function ShimmerBadge() {
   return (
     <motion.div
@@ -124,7 +91,6 @@ function ShimmerBadge() {
         }}
         transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
       >
-        {/* shimmer sweep */}
         <motion.span
           className="absolute inset-y-0 w-16 pointer-events-none"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,180,80,0.25), transparent)' }}
@@ -148,35 +114,55 @@ export function Hero() {
   ];
 
   return (
-    <section className="relative pt-14 pb-8 px-4 overflow-hidden min-h-[380px] flex items-center">
+    /* No overflow-hidden — orbs bleed into the page naturally */
+    <section className="relative pt-14 pb-12 px-4">
 
-      {/* ── background layer ── */}
-      <DotGrid />
+      {/* dot grid — full width, fades at bottom */}
+      <div
+        className="absolute inset-0 pointer-events-none select-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, hsl(24 95% 53% / 0.08) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+        }}
+      />
 
-      {/* orbs */}
-      <Orb
-        className="w-80 h-80 -top-20 -right-24 bg-primary/15"
-        delay={0.2}
+      {/* top-right warm orb — bleeds out of the section */}
+      <motion.div
+        className="absolute -top-28 -right-28 w-[420px] h-[420px] rounded-full pointer-events-none select-none"
+        style={{ background: 'radial-gradient(circle, hsl(24 95% 53% / 0.18) 0%, transparent 70%)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, scale: [0.9, 1.04, 0.97, 1] }}
+        transition={{ opacity: { duration: 1 }, scale: { duration: 7, repeat: Infinity, ease: 'easeInOut' } }}
       />
-      <Orb
-        className="w-64 h-64 bottom-0 -left-20 bg-orange-300/10"
-        delay={0.6}
+
+      {/* bottom-left soft orb */}
+      <motion.div
+        className="absolute -bottom-24 -left-24 w-[340px] h-[340px] rounded-full pointer-events-none select-none"
+        style={{ background: 'radial-gradient(circle, hsl(30 90% 60% / 0.12) 0%, transparent 70%)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, scale: [1, 1.08, 0.96, 1] }}
+        transition={{ opacity: { duration: 1.2, delay: 0.4 }, scale: { duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 } }}
       />
-      <Orb
-        className="w-40 h-40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/8"
-        delay={1}
+
+      {/* bottom fade — blends hero into the rest of the page */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none select-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, hsl(var(--background)))',
+        }}
       />
 
       {/* floating icons */}
-      <FloatingIcon icon={GraduationCap} className="top-8 left-6 w-7 h-7 text-primary/50"    delay={0.8} amplitude={12} />
-      <FloatingIcon icon={Star}          className="top-12 right-8 w-5 h-5 text-orange-400/60" delay={1.2} amplitude={8}  />
-      <FloatingIcon icon={BookOpen}      className="bottom-8 left-10 w-6 h-6 text-primary/40"  delay={1.5} amplitude={10} />
-      <FloatingIcon icon={Award}         className="bottom-6 right-6 w-7 h-7 text-orange-400/45" delay={0.9} amplitude={14} />
+      <FloatingIcon icon={GraduationCap} className="top-8 left-6 w-7 h-7 text-primary/50"      delay={0.8} amplitude={12} />
+      <FloatingIcon icon={Star}          className="top-12 right-8 w-5 h-5 text-orange-400/60"  delay={1.2} amplitude={8}  />
+      <FloatingIcon icon={BookOpen}      className="bottom-16 left-10 w-6 h-6 text-primary/40"  delay={1.5} amplitude={10} />
+      <FloatingIcon icon={Award}         className="bottom-12 right-6 w-7 h-7 text-orange-400/40" delay={0.9} amplitude={14} />
 
-      {/* ── content ── */}
+      {/* content */}
       <div className="relative z-10 w-full max-w-3xl mx-auto text-center space-y-6">
 
-        {/* badge */}
         <ShimmerBadge />
 
         {/* headline */}
@@ -227,7 +213,7 @@ export function Hero() {
           className="flex justify-center pt-2"
         >
           <motion.div
-            className="flex flex-col items-center gap-1 text-muted-foreground/60"
+            className="flex flex-col items-center gap-1 text-muted-foreground/50"
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           >

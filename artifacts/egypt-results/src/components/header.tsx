@@ -10,9 +10,12 @@ import type { DataStatus } from '@/types';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [status, setStatus] = useState<DataStatus | null>(null);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
@@ -93,7 +96,7 @@ export function Header() {
                   aria-label={label}
                   className={cn(
                     'p-1.5 rounded-full transition-all duration-200',
-                    theme === value
+                    mounted && theme === value
                       ? 'bg-background shadow-sm text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
                   )}
@@ -176,7 +179,7 @@ export function Header() {
                         aria-label={label}
                         className={cn(
                           'p-2 rounded-full transition-all duration-200',
-                          theme === value
+                          mounted && theme === value
                             ? 'bg-background shadow-sm text-foreground'
                             : 'text-muted-foreground'
                         )}

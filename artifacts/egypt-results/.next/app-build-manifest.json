@@ -1,59 +1,30 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/chunks/app/_not-found/page-849b2e25ba8b4565.js"
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
     "/not-found": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/chunks/39-380cea0f7e43997d.js",
-      "static/chunks/app/not-found-aec3b7d770cbf3b2.js"
-    ],
-    "/layout": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/css/f2fbda27e4d951f7.css",
-      "static/chunks/401-d24986bb34e5c981.js",
-      "static/chunks/39-380cea0f7e43997d.js",
-      "static/chunks/592-6cae3e8da50678e6.js",
-      "static/chunks/app/layout-b0cdf9dd33a15951.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
     ],
     "/page": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/chunks/401-d24986bb34e5c981.js",
-      "static/chunks/789-c9a21803e2b2ef39.js",
-      "static/chunks/app/page-de206f687ebf3dc8.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
-    "/result/[seatNumber]/page": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/chunks/401-d24986bb34e5c981.js",
-      "static/chunks/39-380cea0f7e43997d.js",
-      "static/chunks/291-651bbed98cf8ca86.js",
-      "static/chunks/app/result/[seatNumber]/page-ab133b9eebefcbb3.js"
+    "/api/admin/status/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/status/route.js"
     ],
-    "/admin/page": [
-      "static/chunks/webpack-35c1cffb62445ea4.js",
-      "static/chunks/b5a34921-053f159367c5d12b.js",
-      "static/chunks/423-6df8632efc2c50f7.js",
-      "static/chunks/main-app-5d364fa03860859c.js",
-      "static/chunks/401-d24986bb34e5c981.js",
-      "static/chunks/592-6cae3e8da50678e6.js",
-      "static/chunks/670-a327ffcb267d606c.js",
-      "static/chunks/app/admin/page-d62f7d5696fb0c66.js"
+    "/api/healthz/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/healthz/route.js"
     ]
   }
 }

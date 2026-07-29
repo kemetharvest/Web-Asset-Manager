@@ -1,0 +1,123 @@
+
+
+1/3
+
+Next.js 15.5.22 (outdated)
+Webpack
+Runtime NotFoundError
+
+
+Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.
+
+Call Stack
+53
+
+Hide 53 ignore-listed frame(s)
+insertOrAppendPlacementNodeIntoContainer
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (12783:1)
+insertOrAppendPlacementNodeIntoContainer
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (12805:1)
+insertOrAppendPlacementNodeIntoContainer
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (12810:1)
+insertOrAppendPlacementNodeIntoContainer
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (12805:1)
+commitPlacement
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (12874:1)
+runWithFiberInDEV
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (871:1)
+commitReconciliationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14100:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13624:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13639:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13639:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13639:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13639:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (14091:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+recursivelyTraverseMutationEffects
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13611:1)
+commitMutationEffectsOnFiber
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (13623:1)
+Router
+../../../src/client/components/app-router.tsx (489:12)
+AppRouter
+../../node_modules/.pnpm/next@15.5.22_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/client/components/app-router.js
+ServerRoot
+../src/client/app-index.tsx (170:5)
+1
+2

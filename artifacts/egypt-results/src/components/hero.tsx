@@ -7,13 +7,13 @@ const wordVariant = {
   hidden: { opacity: 0, y: 28, filter: 'blur(6px)' },
   visible: (i: number) => ({
     opacity: 1, y: 0, filter: 'blur(0px)',
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.11 },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 + i * 0.11 },
   }),
 };
 
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const, delay } },
 });
 
 /* ── underline ──────────────────────────────────────── */
@@ -26,7 +26,7 @@ function AnimatedUnderline() {
         style={{ background: 'linear-gradient(90deg,hsl(24 95% 53%),hsl(20 100% 68%),hsl(24 95% 53%))' }}
         initial={{ width: 0 }}
         animate={{ width: '100%' }}
-        transition={{ delay: 0.55, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.55, duration: 1.0, ease: [0.22, 1, 0.36, 1] as const }}
       />
       <motion.div
         className="absolute inset-y-0 w-16 rounded-full"
@@ -45,7 +45,7 @@ function Badge() {
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
       className="flex justify-center"
     >
       <motion.span

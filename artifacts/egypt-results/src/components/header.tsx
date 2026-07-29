@@ -42,7 +42,7 @@ export function Header() {
           'fixed top-0 z-50 w-full transition-all duration-300 no-print',
           scrolled
             ? 'glass glass-border shadow-lg shadow-black/5'
-            : 'bg-transparent'
+            : 'bg-background/75 backdrop-blur-md'
         )}
       >
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -109,7 +109,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-xl bg-foreground/8 hover:bg-foreground/15 text-foreground transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="القائمة"
           >

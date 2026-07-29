@@ -3,9 +3,9 @@ import { SearchCard } from '@/components/search-card';
 
 export default function HomePage() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-0">
       <Hero />
-      <div className="py-16 px-4">
+      <div className="pb-12 pt-2">
         <SearchCard />
       </div>
     </div>

@@ -40,13 +40,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning className={`${ibmArabic.variable} ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {/* ── page-level ambient glow — bleeds through all sections ── */}
+          {/* ── subtle page-level ambient glow ── */}
           <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[340px] bg-primary/10 rounded-full blur-[80px]" />
-            <div className="absolute top-1/3 -right-32 w-72 h-72 bg-primary/7 rounded-full blur-[60px]" />
-            <div className="absolute bottom-1/4 -left-24 w-56 h-56 bg-primary/5 rounded-full blur-[50px]" />
+            {/* light mode: soft top glow | dark mode: very subtle so it doesn't overwhelm */}
+            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] h-[280px] rounded-full blur-[90px]
+                            bg-primary/8 dark:bg-primary/4" />
+            <div className="absolute top-1/3 -right-24 w-64 h-64 rounded-full blur-[70px]
+                            bg-primary/6 dark:bg-primary/3" />
+            <div className="absolute bottom-1/4 -left-20 w-52 h-52 rounded-full blur-[60px]
+                            bg-primary/4 dark:bg-primary/2" />
           </div>
 
           <Header />

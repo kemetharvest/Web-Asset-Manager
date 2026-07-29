@@ -48,51 +48,94 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           #__preloader {
             position: fixed; inset: 0; z-index: 9999;
             display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 20px;
+            align-items: center; justify-content: center;
+            gap: 0;
             background: #fafafa;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1);
           }
           @media (prefers-color-scheme: dark) {
-            #__preloader { background: #0d0d0d; }
-            #__preloader .pl-text { color: #f5f5f5; }
-            #__preloader .pl-sub { color: #888; }
-            #__preloader .pl-dot { background: #f97316; }
+            #__preloader { background: #0c0c0c; }
+            .pl-title { color: #f0f0f0; }
+            .pl-sub { color: #555; }
+            .pl-ring { border-color: #1f1f1f; }
           }
-          .pl-text {
-            font-family: system-ui, -apple-system, sans-serif;
-            font-size: 1.6rem; font-weight: 700;
-            color: #1a1a1a; letter-spacing: -0.02em;
+
+          /* ── icon ring ── */
+          .pl-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 28px rgba(249,115,22,0.35);
+            animation: pl-pulse 2.4s ease-in-out infinite;
+          }
+          .pl-icon svg { width: 26px; height: 26px; fill: white; }
+
+          /* ── brand text ── */
+          .pl-title {
+            font-family: var(--font-ibm-arabic, 'IBM Plex Sans Arabic', system-ui, sans-serif);
+            font-size: clamp(1.75rem, 6vw, 2.5rem);
+            font-weight: 700;
+            color: #111;
+            letter-spacing: -0.03em;
             direction: rtl;
+            line-height: 1.1;
+            margin-bottom: 8px;
           }
-          .pl-text span { color: #f97316; }
+          .pl-title .pl-accent {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+
+          /* ── tagline ── */
           .pl-sub {
-            font-family: system-ui, -apple-system, sans-serif;
-            font-size: 0.75rem; color: #888; direction: rtl;
+            font-family: var(--font-ibm-arabic, 'IBM Plex Sans Arabic', system-ui, sans-serif);
+            font-size: 0.8rem;
+            color: #999;
+            direction: rtl;
+            letter-spacing: 0.01em;
+            margin-bottom: 36px;
           }
-          .pl-dots { display: flex; gap: 6px; }
-          .pl-dot {
-            width: 7px; height: 7px; border-radius: 50%;
-            background: #f97316; opacity: 0.3;
-            animation: pl-bounce 1.2s ease-in-out infinite;
+
+          /* ── slim loading bar ── */
+          .pl-track {
+            width: 120px; height: 2px;
+            background: rgba(249,115,22,0.12);
+            border-radius: 9999px;
+            overflow: hidden;
           }
-          .pl-dot:nth-child(2) { animation-delay: 0.2s; }
-          .pl-dot:nth-child(3) { animation-delay: 0.4s; }
-          @keyframes pl-bounce {
-            0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
-            40% { opacity: 1; transform: scale(1); }
+          .pl-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f97316, #fb923c);
+            border-radius: 9999px;
+            animation: pl-slide 1.6s cubic-bezier(0.4,0,0.2,1) infinite;
+          }
+
+          @keyframes pl-pulse {
+            0%, 100% { box-shadow: 0 8px 28px rgba(249,115,22,0.3); transform: scale(1); }
+            50%       { box-shadow: 0 8px 36px rgba(249,115,22,0.5); transform: scale(1.04); }
+          }
+          @keyframes pl-slide {
+            0%   { transform: translateX(-100%); width: 60%; }
+            50%  { transform: translateX(50%);   width: 80%; }
+            100% { transform: translateX(200%);  width: 60%; }
           }
         ` }} />
       </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden">
         {/* preloader — removed by PreloaderRemover on first React paint */}
         <div id="__preloader" aria-hidden="true">
-          <p className="pl-text">نتيجة <span>مصر</span></p>
-          <div className="pl-dots">
-            <div className="pl-dot" />
-            <div className="pl-dot" />
-            <div className="pl-dot" />
+          {/* graduation-cap icon */}
+          <div className="pl-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18V17l7 4 7-4v-3.82l-7 3.82-7-3.82z"/>
+            </svg>
           </div>
-          <p className="pl-sub">جاري التحميل...</p>
+          <p className="pl-title">نتيجة <span className="pl-accent">مصر</span></p>
+          <p className="pl-sub">بوابة الثانوية العامة</p>
+          <div className="pl-track"><div className="pl-fill" /></div>
         </div>
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

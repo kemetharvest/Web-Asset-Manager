@@ -5,17 +5,15 @@ A production-ready web portal for Egyptian High School (Thanaweya Amma) exam res
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
-- `pnpm --filter @workspace/egypt-results run dev` — run the frontend (port assigned by workflow)
+- `pnpm --filter @workspace/egypt-results run dev` — run the Next.js frontend (port assigned by workflow)
 - `pnpm run typecheck` — full typecheck across all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- Frontend: React 19 + Vite + Tailwind CSS + Framer Motion + shadcn/ui
+- pnpm workspaces, Node.js 20, TypeScript 5.9
+- **Frontend: Next.js 15 (App Router) + React 19 + Tailwind CSS v4 + Framer Motion + shadcn/ui + IBM Plex Sans Arabic**
 - Backend: Express 5 + in-memory student store (Map for O(1) seat-number lookup)
 - Data: xlsx package reads `.xlsx`/`.xls` Excel files
-- API codegen: Orval (from OpenAPI spec in `lib/api-spec/openapi.yaml`)
 - File upload: multer (memory storage, 200MB limit)
 
 ## Where things live

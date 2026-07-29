@@ -208,14 +208,9 @@ export function SearchCard() {
                   background: 'linear-gradient(135deg, hsl(24 95% 50%), hsl(20 100% 60%))',
                 }}
               >
-                {/* shimmer */}
+                {/* shimmer — CSS animation, no Framer Motion repeat:Infinity */}
                 <span className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
-                  <motion.span
-                    className="absolute inset-y-0 w-20 bg-white/20 skew-x-[-20deg]"
-                    initial={{ left: '-30%' }}
-                    animate={{ left: '130%' }}
-                    transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
-                  />
+                  <span className="animate-btn-shimmer absolute inset-y-0 w-20 bg-white/20 skew-x-[-20deg]" />
                 </span>
                 {isSearchingSeat
                   ? <><Loader2 className="w-4 h-4 animate-spin" /> جاري البحث...</>

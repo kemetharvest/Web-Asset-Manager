@@ -28,12 +28,10 @@ function AnimatedUnderline() {
         animate={{ width: '100%' }}
         transition={{ delay: 0.55, duration: 1.0, ease: [0.22, 1, 0.36, 1] as const }}
       />
-      <motion.div
-        className="absolute inset-y-0 w-16 rounded-full"
+      {/* shimmer — CSS animation, no Framer Motion repeat:Infinity */}
+      <span
+        className="animate-underline-shimmer absolute inset-y-0 w-16 rounded-full"
         style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent)' }}
-        initial={{ right: '-15%' }}
-        animate={{ right: '115%' }}
-        transition={{ delay: 1.9, duration: 1.1, ease: 'easeInOut', repeat: Infinity, repeatDelay: 3.2 }}
       />
     </div>
   );
@@ -48,21 +46,16 @@ function Badge() {
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
       className="flex justify-center"
     >
-      <motion.span
-        className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold overflow-hidden"
-        animate={{ boxShadow: ['0 0 0px hsl(24 95% 53%/0)','0 0 14px hsl(24 95% 53%/0.3)','0 0 0px hsl(24 95% 53%/0)'] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        {/* shimmer */}
-        <motion.span
-          className="absolute inset-y-0 w-10 pointer-events-none"
+      {/* CSS-only infinite glow — no Framer Motion repeat:Infinity */}
+      <span className="animate-badge-glow relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold overflow-hidden">
+        {/* shimmer — CSS animation */}
+        <span
+          className="animate-shimmer-rtl absolute inset-y-0 w-10 pointer-events-none"
           style={{ background: 'linear-gradient(90deg,transparent,rgba(255,180,80,0.28),transparent)' }}
-          initial={{ right: '-20%' }} animate={{ right: '120%' }}
-          transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut', delay: 1 }}
         />
         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shrink-0" />
         بوابة نتائج الثانوية العامة — مصر
-      </motion.span>
+      </span>
     </motion.div>
   );
 }
@@ -133,21 +126,17 @@ export function Hero() {
           <span className="text-primary font-semibold">الاسم</span>
         </motion.p>
 
-        {/* scroll hint */}
+        {/* scroll hint — CSS bob, no Framer Motion repeat:Infinity */}
         <motion.div
           variants={fadeUp(0.75)} initial="hidden" animate="visible"
           className="flex justify-center pt-1"
         >
-          <motion.div
-            className="flex flex-col items-center gap-0.5 text-muted-foreground/35 select-none"
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          >
+          <div className="animate-bob flex flex-col items-center gap-0.5 text-muted-foreground/35 select-none">
             <span className="text-[9px] tracking-widest uppercase font-medium">ابحث الآن</span>
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M8 3v10M8 13l-3.5-3.5M8 13l3.5-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

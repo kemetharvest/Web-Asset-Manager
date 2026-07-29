@@ -1,3 +1,7 @@
 {
-  "/page": "app/page.js"
+  "/api/admin/status/route": "app/api/admin/status/route.js",
+  "/api/results/search/route": "app/api/results/search/route.js",
+  "/api/results/[seatNumber]/route": "app/api/results/[seatNumber]/route.js",
+  "/page": "app/page.js",
+  "/result/[seatNumber]/page": "app/result/[seatNumber]/page.js"
 }

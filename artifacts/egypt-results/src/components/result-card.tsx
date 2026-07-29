@@ -1,82 +1,119 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { CheckCircle2, XCircle, Printer, ArrowRight, GraduationCap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import confetti from 'canvas-confetti';
+import {
+  CheckCircle2, XCircle, Printer, ArrowRight,
+  GraduationCap, Share2, Copy, Check,
+} from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ShareButtons } from '@/components/share-buttons';
 import { getPercentage, isPass, MAX_DEGREE } from '@/lib/utils';
 import { fetchResultBySeat } from '@/lib/api';
 import type { Student } from '@/types';
 
-function CircularProgress({ value, color }: { value: number; color: string }) {
-  const radius = 45;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (value / 100) * circumference;
+/* ── circular progress ring ── */
+function RingProgress({ value, pass }: { value: number; pass: boolean }) {
+  const r = 48;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - (value / 100) * circ;
 
   return (
-    <div className="relative w-36 h-36 flex items-center justify-center">
-      <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-        <circle className="text-muted stroke-current" strokeWidth="7" cx="50" cy="50" r={radius} fill="transparent" />
+    <div className="relative w-32 h-32 flex items-center justify-center">
+      <svg className="w-full h-full -rotate-90" viewBox="0 0 110 110">
+        {/* track */}
+        <circle cx="55" cy="55" r={r} fill="none"
+          stroke="hsl(var(--border))" strokeWidth="8" />
+        {/* fill */}
         <motion.circle
-          className={`stroke-current ${color}`}
-          strokeWidth="7"
-          strokeLinecap="round"
-          cx="50" cy="50" r={radius}
-          fill="transparent"
-          initial={{ strokeDashoffset: circumference }}
+          cx="55" cy="55" r={r} fill="none"
+          strokeWidth="8" strokeLinecap="round"
+          stroke={pass ? 'hsl(142 71% 45%)' : 'hsl(0 84% 60%)'}
+          strokeDasharray={circ}
+          initial={{ strokeDashoffset: circ }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1.8, ease: 'easeOut', delay: 0.3 }}
-          style={{ strokeDasharray: circumference }}
+          transition={{ duration: 1.6, ease: 'easeOut', delay: 0.4 }}
+        />
+        {/* glow duplicate */}
+        <motion.circle
+          cx="55" cy="55" r={r} fill="none"
+          strokeWidth="4" strokeLinecap="round"
+          stroke={pass ? 'hsl(142 71% 45% / 0.3)' : 'hsl(0 84% 60% / 0.3)'}
+          strokeDasharray={circ}
+          initial={{ strokeDashoffset: circ }}
+          animate={{ strokeDashoffset: offset }}
+          transition={{ duration: 1.6, ease: 'easeOut', delay: 0.45 }}
+          style={{ filter: 'blur(4px)' }}
         />
       </svg>
-      <div className="absolute flex flex-col items-center justify-center">
-        <span className="text-2xl font-bold" dir="ltr">{value.toFixed(1)}%</span>
-        <span className="text-xs text-muted-foreground">النسبة</span>
+      <div className="absolute text-center">
+        <p className="text-2xl font-extrabold leading-none tabular-nums" dir="ltr">
+          {value.toFixed(0)}%
+        </p>
+        <p className="text-[10px] text-muted-foreground mt-0.5">النسبة</p>
       </div>
     </div>
   );
 }
 
+/* ── skeleton ── */
 function LoadingSkeleton() {
   return (
-    <div className="max-w-3xl mx-auto space-y-6 pt-8">
-      <Skeleton className="w-28 h-10" />
-      <Skeleton className="w-full h-[500px] rounded-3xl" />
+    <div className="max-w-xl mx-auto space-y-4 pt-6">
+      <Skeleton className="w-24 h-8 rounded-xl" />
+      <Skeleton className="w-full h-80 rounded-2xl" />
     </div>
   );
 }
 
+/* ── error ── */
 function ErrorState() {
   return (
-    <div className="max-w-xl mx-auto pt-24 text-center space-y-6">
+    <div className="max-w-sm mx-auto pt-20 text-center space-y-5">
       <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-        className="w-24 h-24 bg-destructive/10 rounded-full flex items-center justify-center mx-auto"
+        initial={{ scale: 0 }} animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 220, delay: 0.1 }}
+        className="w-20 h-20 bg-destructive/10 rounded-full flex items-center justify-center mx-auto"
       >
-        <XCircle className="w-12 h-12 text-destructive" />
+        <XCircle className="w-10 h-10 text-destructive" />
       </motion.div>
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-        <h2 className="text-3xl font-bold mb-3">عذراً، لم يتم العثور على نتيجة</h2>
-        <p className="text-muted-foreground text-lg">تأكد من كتابة رقم الجلوس بشكل صحيح وحاول مرة أخرى.</p>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        <h2 className="text-2xl font-bold mb-2">لم يتم العثور على نتيجة</h2>
+        <p className="text-muted-foreground text-sm">تأكد من رقم الجلوس وحاول مرة أخرى.</p>
       </motion.div>
-      <Link href="/" className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl bg-primary text-primary-foreground font-bold shadow-md hover:bg-primary/90 transition-all">
-        <ArrowRight className="w-5 h-5" />
-        العودة للبحث
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-sm shadow-md shadow-primary/30 hover:opacity-90 transition-opacity"
+      >
+        <ArrowRight className="w-4 h-4" />
+        بحث جديد
       </Link>
     </div>
   );
 }
 
+/* ── copy-to-clipboard hook ── */
+function useCopy() {
+  const [copied, setCopied] = useState(false);
+  const copy = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+  return { copied, copy };
+}
+
+/* ── main card ── */
 export function ResultCard({ seatNumber }: { seatNumber: number }) {
   const router = useRouter();
+  const { copied, copy } = useCopy();
   const [student, setStudent] = useState<Student | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const confettiFired = useRef(false);
 
   useEffect(() => {
     if (!seatNumber) return;
@@ -86,107 +123,165 @@ export function ResultCard({ seatNumber }: { seatNumber: number }) {
       .catch(() => { setError(true); setLoading(false); });
   }, [seatNumber]);
 
+  /* fire confetti once when a passing result loads */
+  useEffect(() => {
+    if (!student || !isPass(student.studentCaseDesc) || confettiFired.current) return;
+    confettiFired.current = true;
+    const fire = (particleRatio: number, opts: confetti.Options) =>
+      confetti({ origin: { y: 0.6 }, ...opts, particleCount: Math.floor(200 * particleRatio) });
+
+    setTimeout(() => {
+      fire(0.25, { spread: 26, startVelocity: 55, colors: ['#f97316', '#fb923c', '#fed7aa'] });
+      fire(0.2,  { spread: 60, colors: ['#f97316', '#000000', '#ffffff'] });
+      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#f97316', '#fb923c'] });
+      fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      fire(0.1,  { spread: 120, startVelocity: 45, colors: ['#f97316', '#000'] });
+    }, 600);
+  }, [student]);
+
   if (loading) return <LoadingSkeleton />;
   if (error || !student) return <ErrorState />;
 
   const percentage = getPercentage(student.totalDegree);
   const pass = isPass(student.studentCaseDesc);
-  const statusColor = pass ? 'text-success' : 'text-destructive';
-  const progressColor = pass ? 'text-success' : 'text-destructive';
-  const statusBg = pass ? 'bg-success/10 border-success/20 text-success' : 'bg-destructive/10 border-destructive/20 text-destructive';
   const StatusIcon = pass ? CheckCircle2 : XCircle;
 
+  const shareText = `نتيجتي في الثانوية العامة 🎓\nالاسم: ${student.arabicName}\nالمجموع: ${student.totalDegree}/${MAX_DEGREE} (${percentage.toFixed(1)}%)\nالحالة: ${student.studentCaseDesc}`;
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6 pt-4 pb-16">
-      {/* Top bar */}
+    <div className="max-w-xl mx-auto pt-4 pb-16 space-y-4">
+
+      {/* ── top action bar ── */}
       <div className="flex items-center justify-between no-print">
         <button
           onClick={() => router.push('/')}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium"
         >
           <ArrowRight className="w-4 h-4" />
           بحث جديد
         </button>
         <button
           onClick={() => window.print()}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border text-sm font-medium hover:bg-muted transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-xs font-medium hover:bg-muted transition-colors"
         >
-          <Printer className="w-4 h-4" />
+          <Printer className="w-3.5 h-3.5" />
           طباعة
         </button>
       </div>
 
-      {/* Main Result Card */}
+      {/* ── main card ── */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="print-card rounded-3xl glass glass-border shadow-2xl shadow-black/10 overflow-hidden relative"
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        className="print-card rounded-2xl bg-card border border-border shadow-xl shadow-black/8 overflow-hidden"
       >
-        {/* Top gradient bar */}
-        <div className={`h-1.5 w-full ${pass ? 'bg-gradient-to-l from-success via-primary to-secondary' : 'bg-gradient-to-l from-destructive via-destructive/70 to-destructive/40'}`} />
+        {/* accent top bar */}
+        <div
+          className="h-1 w-full"
+          style={{
+            background: pass
+              ? 'linear-gradient(90deg, hsl(24 95% 53%), hsl(142 71% 45%))'
+              : 'linear-gradient(90deg, hsl(0 84% 60%), hsl(0 72% 51%))',
+          }}
+        />
 
-        <div className="p-4 sm:p-8 md:p-10">
-          {/* Header */}
-          <div className="flex flex-col items-center gap-6 pb-6 border-b border-border">
-            {/* Circular progress - top on mobile */}
-            <div className="flex-shrink-0 flex flex-col items-center gap-2">
-              <CircularProgress value={percentage} color={progressColor} />
-              <p className="text-sm text-muted-foreground font-medium text-center">
-                المجموع:{' '}
-                <span className="text-foreground font-bold text-lg" dir="ltr">{student.totalDegree}</span>
-                <span className="text-xs"> / {MAX_DEGREE}</span>
+        <div className="p-5 sm:p-7">
+
+          {/* ── score + name block ── */}
+          <div className="flex flex-col items-center gap-4 pb-5 border-b border-border">
+
+            {/* ring */}
+            <RingProgress value={percentage} pass={pass} />
+
+            {/* label */}
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+              className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-bold ${
+                pass
+                  ? 'bg-green-50 border-green-200 text-green-700 dark:bg-green-950/40 dark:border-green-800 dark:text-green-400'
+                  : 'bg-red-50 border-red-200 text-red-700 dark:bg-red-950/40 dark:border-red-800 dark:text-red-400'
+              }`}
+            >
+              <StatusIcon className="w-4 h-4" />
+              {student.studentCaseDesc}
+            </motion.div>
+
+            {/* student name */}
+            <div className="text-center w-full">
+              <p className="text-[11px] text-muted-foreground uppercase tracking-wider mb-1 flex items-center justify-center gap-1.5">
+                <GraduationCap className="w-3.5 h-3.5" />
+                اسم الطالب
               </p>
-            </div>
-
-            <div className="w-full text-center space-y-3">
-              <div className="flex items-center justify-center gap-2 text-sm font-semibold tracking-widest text-accent uppercase">
-                <GraduationCap className="w-4 h-4" />
-                بطاقة نتيجة طالب
-              </div>
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug break-words w-full"
+                transition={{ delay: 0.25 }}
+                className="text-2xl sm:text-3xl font-extrabold leading-snug break-words"
               >
                 {student.arabicName}
               </motion.h1>
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm font-semibold">
-                  رقم الجلوس:
-                  <span className="text-foreground font-bold" dir="ltr">{student.seatNumber}</span>
-                </span>
-                <motion.span
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.4, type: 'spring' }}
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm font-bold ${statusBg}`}
-                >
-                  <StatusIcon className="w-4 h-4" />
-                  {student.studentCaseDesc}
-                </motion.span>
+            </div>
+          </div>
+
+          {/* ── score detail row ── */}
+          <div className="grid grid-cols-3 gap-3 py-5 border-b border-border text-center">
+            {[
+              { label: 'رقم الجلوس', value: student.seatNumber, ltr: true },
+              { label: 'المجموع',    value: `${student.totalDegree}`, ltr: true },
+              { label: 'من',         value: String(MAX_DEGREE), ltr: true },
+            ].map(({ label, value, ltr }) => (
+              <div key={label} className="space-y-1">
+                <p className="text-[10px] text-muted-foreground font-medium">{label}</p>
+                <p className="text-lg font-extrabold tabular-nums" dir={ltr ? 'ltr' : 'rtl'}>{value}</p>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Share */}
-          <div className="pt-8 space-y-6">
-            <ShareButtons
-              student={student}
-              percentage={percentage}
-              isPass={pass}
-            />
+          {/* ── action buttons ── */}
+          <div className="pt-5 flex flex-col sm:flex-row gap-2 no-print">
 
-            <div className="bg-muted/50 rounded-2xl p-5 text-center text-sm text-muted-foreground leading-relaxed">
-              ⚠️ هذه النتيجة استرشادية ولا تغني عن الشهادة الرسمية المعتمدة من المدرسة.
-            </div>
+            {/* copy result */}
+            <motion.button
+              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              onClick={() => copy(shareText)}
+              className="flex-1 inline-flex items-center justify-center gap-2 h-10 rounded-xl border border-border text-sm font-semibold hover:bg-muted transition-colors"
+            >
+              <AnimatePresence mode="wait">
+                {copied
+                  ? <motion.span key="ok" initial={{ scale: 0 }} animate={{ scale: 1 }}
+                      className="inline-flex items-center gap-1.5 text-green-600">
+                      <Check className="w-4 h-4" /> تم النسخ
+                    </motion.span>
+                  : <motion.span key="cp" initial={{ scale: 0 }} animate={{ scale: 1 }}
+                      className="inline-flex items-center gap-1.5">
+                      <Copy className="w-4 h-4" /> نسخ النتيجة
+                    </motion.span>
+                }
+              </AnimatePresence>
+            </motion.button>
+
+            {/* share */}
+            {typeof navigator !== 'undefined' && 'share' in navigator && (
+              <motion.button
+                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                onClick={() => navigator.share({ title: 'نتيجتي', text: shareText })}
+                className="flex-1 inline-flex items-center justify-center gap-2 h-10 rounded-xl text-sm font-bold text-white transition-opacity hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg, hsl(24 95% 50%), hsl(20 100% 60%))' }}
+              >
+                <Share2 className="w-4 h-4" />
+                مشاركة النتيجة
+              </motion.button>
+            )}
           </div>
+
+          {/* disclaimer */}
+          <p className="mt-4 text-center text-[11px] text-muted-foreground leading-relaxed">
+            ⚠️ هذه النتيجة استرشادية ولا تغني عن الشهادة الرسمية المعتمدة من المدرسة.
+          </p>
         </div>
-
-        {/* Background decoration */}
-        <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -top-20 -right-20 w-60 h-60 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       </motion.div>
     </div>
   );

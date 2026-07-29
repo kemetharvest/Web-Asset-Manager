@@ -1,0 +1,355 @@
+Build a complete, production-ready, responsive web application for displaying Egyptian High School (Thanaweya Amma) exam results.
+
+Project Name:
+Egypt Results Portal
+
+Tech Stack:
+- Frontend: React + TypeScript + Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide React Icons
+- Backend: Node.js + Express
+- Read Excel files using xlsx package
+- Store uploaded data in memory (or JSON after upload)
+- Clean folder structure
+- Mobile-first responsive design
+
+========================================
+GENERAL DESIGN
+========================================
+
+Create a premium educational website.
+
+Do NOT use AI-style gradients or futuristic neon colors.
+
+Use elegant colors such as:
+
+Primary:
+#0F4C81
+
+Secondary:
+#1E6F5C
+
+Accent:
+#C59D5F
+
+Background:
+#F6F7F9
+
+Cards:
+White with soft shadows.
+
+Rounded corners:
+18px
+
+Professional spacing.
+
+Glass effect only slightly.
+
+Smooth animations.
+
+Arabic typography:
+Cairo
+
+English typography:
+Inter
+
+Entire website supports RTL and LTR.
+
+Default language:
+Arabic.
+
+========================================
+HOME PAGE
+========================================
+
+Hero section contains
+
+Large title
+
+"نتيجة الثانوية العامة"
+
+Subtitle
+
+"يمكنك الاستعلام عن النتيجة باستخدام رقم الجلوس أو الاسم"
+
+Beautiful search card centered.
+
+Search Tabs:
+
+- البحث برقم الجلوس
+- البحث بالاسم
+
+Animated switching.
+
+========================================
+SEARCH
+========================================
+
+Search by Seat Number
+
+Input
+
+رقم الجلوس
+
+Search button
+
+عرض النتيجة
+
+Search by Name
+
+Input
+
+اسم الطالب
+
+Supports partial matching.
+
+If multiple students found:
+
+Display professional table
+
+الاسم
+رقم الجلوس
+المحافظة
+
+with button
+
+عرض النتيجة
+
+========================================
+RESULT PAGE
+========================================
+
+When found display a beautiful result card.
+
+Include
+
+اسم الطالب
+
+رقم الجلوس
+
+المحافظة
+
+المدرسة
+
+الشعبة
+
+Then display all subjects.
+
+Each subject card contains
+
+اسم المادة
+
+الدرجة
+
+Color according to grade.
+
+At bottom display
+
+المجموع الكلي
+
+النسبة المئوية
+
+الحالة
+
+ناجح
+
+أو
+
+راسب
+
+Add a circular percentage progress indicator.
+
+Include print button.
+
+Download as PDF button.
+
+========================================
+ADMIN PANEL
+========================================
+
+Password protected admin page.
+
+Password stored in environment variable.
+
+Dashboard includes
+
+Upload Excel File
+
+Replace Existing Data
+
+Delete Data
+
+Statistics
+
+Number of students
+
+Average score
+
+Highest score
+
+Lowest score
+
+Number of successful students
+
+Number of failed students
+
+========================================
+EXCEL IMPORT
+========================================
+
+Allow uploading
+
+.xlsx
+
+.xls
+
+Automatically detect columns.
+
+Expected columns include:
+
+SeatNumber
+
+StudentName
+
+Governorate
+
+School
+
+Department
+
+Arabic
+
+English
+
+Math
+
+Physics
+
+Chemistry
+
+Biology
+
+History
+
+Geography
+
+Philosophy
+
+Total
+
+Percentage
+
+Status
+
+If column names differ slightly, intelligently map them.
+
+========================================
+SEARCH SPEED
+========================================
+
+Index data after upload.
+
+Searching should be instant even with over 500,000 students.
+
+========================================
+ERROR HANDLING
+========================================
+
+If no result found show beautiful illustration and message
+
+"عذراً، لم يتم العثور على أي نتيجة."
+
+========================================
+ANIMATIONS
+========================================
+
+Framer Motion
+
+Fade
+
+Slide
+
+Scale
+
+Smooth transitions.
+
+========================================
+SEO
+========================================
+
+Professional SEO
+
+Arabic Meta
+
+Open Graph
+
+Twitter Cards
+
+Structured Data
+
+Dynamic title
+
+========================================
+LOADING
+========================================
+
+Professional loading animation.
+
+Skeleton cards.
+
+========================================
+FOOTER
+========================================
+
+Professional footer.
+
+Left:
+
+© جميع الحقوق محفوظة
+
+Right:
+
+برمجة Ahmed Elhenawy
+
+Make "Ahmed Elhenawy" appear in elegant gold color with a subtle glow.
+
+========================================
+EXTRA FEATURES
+========================================
+
+Dark Mode
+
+Light Mode
+
+Search history
+
+Copy result button
+
+Print result
+
+Download PDF
+
+Responsive for all phones
+
+Responsive for tablets
+
+Responsive for desktop
+
+Fast loading
+
+Accessible
+
+Clean code
+
+Reusable components
+
+Modern architecture
+
+========================================
+OUTPUT
+========================================
+
+Generate the complete project with all pages, backend, frontend, upload system, search engine, responsive layout, animations, admin dashboard, Excel parsing, PDF export, SEO optimization, and polished UI.
+
+The application should look like an official Ministry of Education result portal with premium quality suitable for millions of users.

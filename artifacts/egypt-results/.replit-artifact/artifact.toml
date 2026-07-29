@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Egypt Results Portal"
+version = "1.0.0"
+id = "artifacts/egypt-results"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23847
+
+[services.development]
+run = "pnpm --filter @workspace/egypt-results run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/egypt-results", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/egypt-results/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23847"
+BASE_PATH = "/"

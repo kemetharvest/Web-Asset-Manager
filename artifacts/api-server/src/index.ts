@@ -1,5 +1,6 @@
 import app from "./app";
 import { logger } from "./lib/logger";
+import { preloadExcelData } from "./lib/preload";
 
 const rawPort = process.env["PORT"];
 
@@ -14,6 +15,11 @@ const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
+
+// Pre-load the Excel file if available
+preloadExcelData().catch((err) => {
+  logger.warn({ err }, "Pre-load failed; continuing without data");
+});
 
 app.listen(port, (err) => {
   if (err) {

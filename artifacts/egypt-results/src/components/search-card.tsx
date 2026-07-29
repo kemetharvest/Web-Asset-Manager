@@ -136,14 +136,13 @@ export function SearchCard() {
             >
               <Icon className="w-3.5 h-3.5 shrink-0" />
               {label}
-              {/* active indicator — layoutId is safe, only animates a property, no DOM insert/remove */}
-              {tab === key && (
-                <motion.div
-                  layoutId="tab-indicator"
-                  className="absolute bottom-0 inset-x-0 h-0.5 bg-primary rounded-full"
-                  transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                />
-              )}
+              {/* active indicator — CSS-only, no layoutId (React 19 compat) */}
+              <span
+                className={cn(
+                  'absolute bottom-0 inset-x-0 h-0.5 bg-primary rounded-full transition-opacity duration-200',
+                  tab === key ? 'opacity-100' : 'opacity-0'
+                )}
+              />
             </button>
           ))}
         </div>

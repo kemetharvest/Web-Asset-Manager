@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Sun, Moon, Monitor, Database, Menu, X, GraduationCap, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { DataStatus } from '@/types';
@@ -118,24 +118,24 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-50 h-full w-72 bg-card border-l border-border shadow-2xl md:hidden"
-            >
+      {/* Mobile Drawer — CSS-only transitions, no AnimatePresence (React 19 compat) */}
+      <>
+        {/* backdrop */}
+        <div
+          onClick={() => setMobileOpen(false)}
+          className={cn(
+            'fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden transition-opacity duration-300',
+            mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          )}
+        />
+        {/* drawer */}
+        <div
+          className={cn(
+            'fixed top-0 right-0 z-50 h-full w-72 bg-card border-l border-border shadow-2xl md:hidden',
+            'transition-transform duration-300 ease-out',
+            mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          )}
+        >
               <div className="p-6 space-y-6">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-lg">القائمة</span>
@@ -190,10 +190,8 @@ export function Header() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+        </div>
+      </>
     </>
   );
 }
